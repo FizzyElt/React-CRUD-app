@@ -6,7 +6,7 @@
 ### 使用方法
 1.```yarn install```
 
-2.```yarn global add json-server  ||  npm install -g json-server```
+2.```yarn global add json-server``` or```npm install -g json-server```
 
 3.```yarn server```
 
