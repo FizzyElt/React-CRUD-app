@@ -1,7 +1,7 @@
 ## React CRUD app
 參考別人專案用`Hooks`改寫，並且增加刪除及更新功能
 
-參考網址:https://github.com/ImBobby/simple-react-app
+參考專案:https://github.com/ImBobby/simple-react-app
 
 ### 使用方法
 1.```yarn install```
