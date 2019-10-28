@@ -1,0 +1,21 @@
+@import '../scss/_variables.scss';
+
+.app-header {
+    padding: $space / 2;
+    margin-bottom: $space;
+    color: #fff;
+    background: #333;
+    box-shadow: 0 0 5px #222;
+
+    a {
+        text-decoration: none;
+        color: currentColor;
+    }
+
+    div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+}

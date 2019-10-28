@@ -1,25 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from 'react-router-dom'
+import './index.scss'
+import Home from './views/Home.jsx'
+import PageArticleDetail from './views/PageArticleDetail.jsx'
+import PageNotFound from './views/PageNotFound.jsx'
+import PageCreateArticle from './views/PageCreateArticle.jsx'
+import PageArticleUpdate from './views/PageArticleUpdate.jsx'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <Switch>
+          <Route  path="/" exact component={Home}/>
+          <Route  path="/article/:id" component={PageArticleDetail}/>
+          <Route  path="/new" component={PageCreateArticle}/>
+          <Route path="/update/:id" component={PageArticleUpdate}/>
+          <Redirect exact from="/article" to="/"/>
+          <Route  component={PageNotFound}/>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

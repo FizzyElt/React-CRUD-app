@@ -1,0 +1,60 @@
+
+@import 'scss/variables';
+@import 'scss/normalize';
+@import 'scss/resets';
+
+body {
+    margin: 0;
+    font: 200 18px/1.6em sans-serif;
+}
+
+h1 {
+    color: $primary;
+}
+
+.block {
+    margin-bottom: $space;
+}
+
+.block-half {
+    margin-bottom: $space / 2;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px;
+    border: solid 1px #ccc;
+    border-radius: 3px;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.btn {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 4px $space;
+    border: solid 1px transparent;
+    border-radius: 4px;
+    line-height: $space;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn--primary {
+    color: #fff;
+    background: $red;
+}
+
+.btn--block {
+    width: 100%;
+}
