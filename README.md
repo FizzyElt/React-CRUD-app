@@ -1,12 +1,16 @@
+## React CRUD app
+參考別人專案用`Hooks`改寫，並且增加刪除及更新功能
 
+參考網址:https://github.com/ImBobby/simple-react-app
 
 ### 使用方法
-```
-yarn server
-```
-```
-yarn start
-```
+1.```yarn install```
+
+2.```yarn global add json-server  ||  npm install -g json-server```
+
+3.```yarn server```
+
+4.```yarn start```
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
