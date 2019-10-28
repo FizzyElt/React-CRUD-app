@@ -4,7 +4,9 @@ import { fetchGet, fetchDetele } from '../utils/getJSON.js'
 import { Link } from 'react-router-dom'
 import ArticleTitle from '../components/ArticleTitle.jsx'
 import DateFormat from './DateFormat.jsx'
+import '../scss/_animation.scss'
 import './ArticleList.scss'
+import { CSSTransition } from 'react-transition-group'
 
 const ArticleList = () => {
 
@@ -44,8 +46,11 @@ const ArticleList = () => {
                     </Link>
                     <div>
                         <Link className="btn btn--primary small-btn" to={`update/${d.id}`}>Edit</Link>
-                        <button 
-                        className="btn btn--primary small-btn" onClick={(e) => handleDetele(d.id, e)}>Delete</button>
+                        <button
+                            className="btn btn--primary small-btn"
+                            onClick={(e) => handleDetele(d.id, e)}>
+                            Delete
+                        </button>
                     </div>
 
                 </div>
@@ -57,11 +62,19 @@ const ArticleList = () => {
     if (!data.length && gettingData) return (<Loader />)
     if (!data.length && !gettingData) return (<p>No article...</p>)
     return (
-        <ul className="article-list">
-            {
-                data.map(populateArticle)
-            }
-        </ul>
+        <CSSTransition
+            appear
+            in
+            timeout={1000}
+            classNames="fade">
+            <ul className="article-list">
+                {
+                    data.map(populateArticle)
+                }
+            </ul>
+        </CSSTransition>
+
+
     )
 }
 

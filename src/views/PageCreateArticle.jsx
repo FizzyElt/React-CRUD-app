@@ -3,7 +3,8 @@ import Container from '../components/Container.jsx'
 import Header from '../components/Header.jsx'
 import { Redirect } from 'react-router-dom'
 import { fetchPost } from '../utils/getJSON.js'
-
+import {CSSTransition} from 'react-transition-group'
+import '../scss/_animation.scss'
 const initState = {
     title: '',
     content: ''
@@ -52,6 +53,11 @@ const PageCreateArticle = () => {
     return (
         <div>
             <Header hideCreateBtn />
+            <CSSTransition
+            appear
+            in
+            timeout={800}
+            classNames="fade2">
             <Container>
                 <form className="block" onSubmit={handlePost}>
                     <fieldset>
@@ -83,6 +89,7 @@ const PageCreateArticle = () => {
                     redirect && (<Redirect to="/" />)
                 }
             </Container>
+            </CSSTransition>
         </div>
     );
 }

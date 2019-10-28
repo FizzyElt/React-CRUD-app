@@ -1,8 +1,10 @@
-import React, { useReducer, useState,useEffect } from 'react';
+import React, { useReducer, useState, useEffect } from 'react';
 import Container from '../components/Container.jsx'
 import Header from '../components/Header.jsx'
 import { Redirect } from 'react-router-dom'
-import {fetchGet,fetchPatch} from '../utils/getJSON.js'
+import { fetchGet, fetchPatch } from '../utils/getJSON.js'
+import { CSSTransition } from 'react-transition-group'
+import '../scss/_animation.scss'
 const initState = {
     title: '',
     content: ''
@@ -23,70 +25,76 @@ const reducer = (state, action) => {
             return state
     }
 }
-const PageArticleUpdate = ({match}) => {
+const PageArticleUpdate = ({ match }) => {
 
     const [txtState, dispatch] = useReducer(reducer, initState)
 
     const [redirect, setRedirect] = useState(false);
 
-    useEffect(()=>{
+    useEffect(() => {
         fetchGet(`articles/${match.params.id}`)
-        .then(res=>{
-            const data=res.data;
-            dispatch({type:'UPDATE_TITLE',paylode:data.title})
-            dispatch({type:'UPDATE_CONTENT',paylode:data.content})
-        }).catch(console.log)
-    },[])
+            .then(res => {
+                const data = res.data;
+                dispatch({ type: 'UPDATE_TITLE', paylode: data.title })
+                dispatch({ type: 'UPDATE_CONTENT', paylode: data.content })
+            }).catch(console.log)
+    }, [])
 
     const inputOnChange = (value, type = '') => {
         dispatch({ type, paylode: value })
     }
-    const handlePatch=(e)=>{
+    const handlePatch = (e) => {
         e.preventDefault()
-        if(!txtState.title||!txtState.content){
+        if (!txtState.title || !txtState.content) {
             return alert('please fill all fields')
         }
-        fetchPatch(`articles`,match.params.id,txtState)
-        .then(res=>{
-            console.log('success')
-            setRedirect(true)
-        })
-        .catch()
+        fetchPatch(`articles`, match.params.id, txtState)
+            .then(res => {
+                console.log('success')
+                setRedirect(true)
+            })
+            .catch()
     }
     return (
         <div>
             <Header hideCreateBtn />
-            <Container>
-                <form className="block" onSubmit={handlePatch}>
-                    <fieldset>
-                        <legend className="block-half">Update article</legend>
+            <CSSTransition
+                appear
+                in
+                timeout={800}
+                classNames="fade2">
+                <Container>
+                    <form className="block" onSubmit={handlePatch}>
+                        <fieldset>
+                            <legend className="block-half">Update article</legend>
 
-                        <div className="block-half">
-                            <input className="form-input"
-                                type="text"
-                                name="title"
-                                placeholder="Title"
-                                defaultValue={txtState.title}
-                                onChange={(e) => { inputOnChange(e.currentTarget.value, 'UPDATE_TITLE') }}
-                            />
-                        </div>
-                        <div className="block-half">
-                            <textarea className="form-input"
-                                placeholder="Content"
-                                name="content"
-                                rows="10"
-                                defaultValue={txtState.content}
-                                onChange={(e) => { inputOnChange(e.currentTarget.value, 'UPDATE_CONTENT') }}
-                            >
-                            </textarea>
-                        </div>
-                        <button className="btn btn--block btn--primary">Update</button>
-                    </fieldset>
-                </form>
-                {
-                    redirect && (<Redirect to="/" />)
-                }
-            </Container>
+                            <div className="block-half">
+                                <input className="form-input"
+                                    type="text"
+                                    name="title"
+                                    placeholder="Title"
+                                    defaultValue={txtState.title}
+                                    onChange={(e) => { inputOnChange(e.currentTarget.value, 'UPDATE_TITLE') }}
+                                />
+                            </div>
+                            <div className="block-half">
+                                <textarea className="form-input"
+                                    placeholder="Content"
+                                    name="content"
+                                    rows="10"
+                                    defaultValue={txtState.content}
+                                    onChange={(e) => { inputOnChange(e.currentTarget.value, 'UPDATE_CONTENT') }}
+                                >
+                                </textarea>
+                            </div>
+                            <button className="btn btn--block btn--primary">Update</button>
+                        </fieldset>
+                    </form>
+                    {
+                        redirect && (<Redirect to="/" />)
+                    }
+                </Container>
+            </CSSTransition>
         </div>
     );
 }
